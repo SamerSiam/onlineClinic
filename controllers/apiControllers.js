@@ -85,6 +85,7 @@ const updateUser = async (req, res) => {
 
 /************************User login */
 const userLogin = async (req, res) => {
+  console.log("inside login controler", req.body);
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password);
     const token = await user.generateAuthToken();
