@@ -1,15 +1,33 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import Header from "./Components/Header/Header";
 import User from "./Components/User/User";
 import NotFound from "./Components/NotFound/NotFound";
+import Login from "./Components/Login/Login";
 
 function App() {
-  console.log(process.env.NODE_ENV);
+  // console.log(process.env.NODE_ENV);
+  const [token, setToken] = useState(null);
+  const [loggedUser, setLoggedUser] = useState({});
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", JSON.stringify(token));
+    }
+    const tokenString = localStorage.getItem("token");
+    const userToken = JSON.parse(tokenString);
+    setToken(userToken);
+  }, [token]);
+
+  if (!token) {
+    return <Login setToken={setToken} setLoggedUser={setLoggedUser} />;
+  }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        <Route render={(props) => <Header token={token} {...props} />}></Route>
+
         <Switch>
           <Route path="/" exact component={User} />
           {/* <Route path="/deposit" exact component={Deposit} />
