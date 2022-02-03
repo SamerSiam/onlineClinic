@@ -29,10 +29,7 @@ function App() {
         <Route render={(props) => <Header token={token} {...props} />}></Route>
 
         <Switch>
-          <Route path="/" exact component={User} />
-          {/* <Route path="/deposit" exact component={Deposit} />
-      <Route path="/withdraw" exact component={Withdraw} /> */}
-          <Route Path="/users" exact component={User} />
+          <Route path="/" render={(props) => <User token={token} {...props} />}></Route>
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

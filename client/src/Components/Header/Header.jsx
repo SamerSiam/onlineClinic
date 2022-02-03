@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "./bank.jpg";
+import logo from "./doctor.jpg";
 import "./Header.css";
 import API from "../../api/Api";
 
@@ -8,7 +8,7 @@ const Header = ({ token }) => {
   const userLogOut = async () => {
     try {
       const auth = `Bearer ${token}`;
-      console.log("header is", auth);
+     
       await API.post("/users/logout", {}, { headers: { Authorization: auth } });
     } catch (err) {
       console.log(err);
@@ -19,21 +19,21 @@ const Header = ({ token }) => {
   return (
     <div className="ui secondary pointing menu">
       <div>
-        {" "}
+       
         <img className="logo" src={logo} alt="logo" />
       </div>
-      <h2> Bank API Interface</h2>
+      <h2> My Online Doctor</h2>
       <Link to="/users" className="right item">
-        {" "}
-        User Actions
+       
+        Send a Health Issue
       </Link>
       <Link to="/Account" className="right item">
-        {" "}
-        Account Actions{" "}
+       
+        Live Chat with your Doctor
       </Link>
 
       <Link to="/login" className="right item">
-        <spanc onClick={userLogOut}>Log Out</spanc> <i class="user logout icon"></i>
+        <span onClick={userLogOut}>Log Out</span> <i className="user logout icon"></i>
       </Link>
     </div>
   );

@@ -8,16 +8,22 @@ const formatter = new Intl.NumberFormat("en-US", {
   currency: "USD",
   maximumFractionDigits: 2,
 });
-const User = () => {
-  const [users, setUsers] = useState([]);
+const User = ({token}) => {
+  
+  const [user, setUser] = useState();
 
-  const getAllUsers = async () => {
-    try {
-      let { data } = await API.get("users");
-      setUsers(data);
-    } catch (e) {
-      console.log(e.message);
-    }
+  const getUserInfo = async () => {
+      
+      try {
+        const auth = `Bearer ${token}`;
+        const data=await API.get("/users/me", { headers: { Authorization: auth } });
+        console.log(data.data)
+        setUser(data);
+      } catch (err) {
+        console.log(err);
+      }
+     
+    
   };
 
   const deleteUser = async (item) => {
@@ -26,11 +32,11 @@ const User = () => {
     window.location.reload();
   };
   useEffect(() => {
-    getAllUsers();
+    getUserInfo();
     return () => {};
   }, []);
 
-  if (!users) {
+  if (!user) {
     return <Spinner />;
   } else {
     return (
@@ -46,21 +52,19 @@ const User = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((item, index) => (
-              <tr key={item.id}>
-                <td>{item._id}</td>
-                <td className="name"> {item.name}</td>
-                <td className="name">{item.email}</td>
-                <td> {formatter.format(item.cash)}</td>
-                <td> {formatter.format(item.credit)}</td>
+           <tr>
+                <td className="name"> {user.data.name}</td>
+                <td className="name">{user.data.email}</td>
+                <td> {formatter.format(user.data.cash)}</td>
+                <td> {formatter.format(user.data.credit)}</td>
 
                 <td>
-                  <button className="ui primary button" onClick={() => deleteUser(item)}>
+                  <button className="ui primary button" onClick={() => deleteUser(user.id)}>
                     Delete
                   </button>
                 </td>
-              </tr>
-            ))}
+             
+                </tr>
           </tbody>
         </table>
       </div>

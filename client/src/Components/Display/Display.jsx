@@ -57,7 +57,7 @@ function Display({ users }) {
           <tbody>
             {users.map((item, index) => (
               <tr key={item.id}>
-                <td>{item.market_cap_rank}</td>
+                
                 <td className="name"> {item.id}</td>
                 <td className="name">{item.name}</td>
                 <td> {formatter.format(item.cash)}</td>

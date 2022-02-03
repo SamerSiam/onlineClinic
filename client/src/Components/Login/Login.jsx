@@ -15,16 +15,16 @@ export default function Login({ setToken, setLoggedUser }) {
     e.preventDefault();
     try {
       const res = await API.post("/users/login", { email, password });
-      console.log(res.data.token);
+     
       setUser(res.data);
       setToken(res.data.token);
       setLoggedUser(res.data);
     } catch (err) {
       setError(err);
-      console.log(err);
+      console.log(error);
     }
   };
-
+ 
   /********************************************************** */
   // const userLoginFunc = async (usr, pwd) => {
   //   try {
