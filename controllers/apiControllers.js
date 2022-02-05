@@ -1,11 +1,10 @@
 const User = require("../models/user");
+const Patient = require("../models/patient");
 
 /**********************get all users******************* */
 const getAllUsers = async (req, res) => {
-  console.log("getAllUsers");
-
   try {
-    const user = await User.find({});
+    const user = await Patient.find({});
 
     if (!user) {
       return res.status(400).send("User not found!");
@@ -24,7 +23,7 @@ const getMyUser = async (req, res) => {
 const getUserbyID = async (req, res) => {
   const _id = req.params.id;
   try {
-    const user = await User.findById({ _id });
+    const user = await Patient.findById({ _id });
 
     if (!user) {
       return res.status(400).send("User not found!");
@@ -36,7 +35,7 @@ const getUserbyID = async (req, res) => {
 };
 /**********************add new user************************ */
 const addNewUser = async (req, res) => {
-  const user = new User(req.body);
+  const user = new Patient(req.body);
   try {
     await user.save();
     const token = await user.generateAuthToken();
@@ -49,12 +48,6 @@ const addNewUser = async (req, res) => {
 /**********************delete user************************ */
 const deleteUser = async (req, res) => {
   try {
-    // const user = await User.findByIdAndDelete(req.params.id);
-    // if (!user) {
-    //   return res.status(404).send("User Not Found!");
-    // }
-    // const user = req.user;
-    // const deletedUser = await User.findByIdAndDelete(user.id);
     await req.user.remove();
     res.send("User Removed" + req.user);
   } catch (err) {
@@ -68,7 +61,7 @@ const updateUser = async (req, res) => {
   const updates = Object.keys(req.body);
 
   try {
-    const user = await User.findById(id);
+    const user = await Patient.findById(id);
 
     updates.forEach((update) => (user[update] = req.body[update]));
 
@@ -85,9 +78,8 @@ const updateUser = async (req, res) => {
 
 /************************User login */
 const userLogin = async (req, res) => {
-  console.log("inside login controler", req.body);
   try {
-    const user = await User.findByCredentials(req.body.email, req.body.password);
+    const user = await Patient.findByCredentials(req.body.email, req.body.password);
     const token = await user.generateAuthToken();
     res.send({ user: user, token }); // removes sensitive info
   } catch (err) {
@@ -129,10 +121,6 @@ const depositCash = async (req, res) => {
     const user = await User.findById(id);
     user[cash] = user[cash] + cash;
     await user.save();
-    // const user = await User.findByIdAndUpdate(id, update, {
-    //   new: true,
-    //   runValidators: true,
-    // });
 
     if (!user) {
       return res.status(404).send("User not found, unable to deposit cash");
