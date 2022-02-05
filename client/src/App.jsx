@@ -4,6 +4,8 @@ import Header from "./Components/Header/Header";
 import User from "./Components/User/User";
 import NotFound from "./Components/NotFound/NotFound";
 import Login from "./Components/Login/Login";
+import Chat from "./Components/Chat/Chat";
+
 
 function App() {
   // console.log(process.env.NODE_ENV);
@@ -24,6 +26,7 @@ function App() {
   }
 
   return (
+    
     <div className="App">
       <BrowserRouter>
         <Route render={(props) => <Header token={token} {...props} />}></Route>
@@ -33,6 +36,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
+      <Chat/>
     </div>
   );
 }
