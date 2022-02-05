@@ -22,7 +22,13 @@ function App() {
   }, [token]);
 
   if (!token) {
-    return <Login setToken={setToken} setLoggedUser={setLoggedUser} />;
+    return( 
+    <div>
+      <Login setToken={setToken} setLoggedUser={setLoggedUser}/>
+      <Chat/>
+      </div>
+    
+    )
   }
 
   return (
@@ -36,7 +42,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
-      <Chat/>
+     
     </div>
   );
 }
