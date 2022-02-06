@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "https://samer-online-clinic.herokuapp.com/";
+const ENDPOINT = "http://127.0.0.1:5000";
 
 const Chat = ({token}) => {
     const [response, setResponse] = useState("");
 
     useEffect(() => {
-        const socket = socketIOClient(ENDPOINT);
+        const socket = socketIOClient.connect(ENDPOINT);
         socket.on("FromAPI", data => {
           setResponse(data);
         });

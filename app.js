@@ -13,7 +13,15 @@ const path = require("path");
 
 const app = express();
 const chatServer = http.createServer(app);
-const io = socketio(chatServer);
+// const io = socketio(chatServer);
+
+const io = require("socket.io")(chatServer, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowHeaders: "*",
+  },
+});
 
 app.use(cors());
 app.use(express.json());
@@ -24,7 +32,10 @@ const publicPath = path.join(__dirname, "client/build");
 app.use(express.static(publicPath));
 
 io.on("connection", () => {
-  console.log("New WebSicket connection");
+  console.log("New WebSocket connection");
+});
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(publicPath, "index.html"));
 });
 chatServer.listen(port, () => {
   console.log("listening on port " + port);

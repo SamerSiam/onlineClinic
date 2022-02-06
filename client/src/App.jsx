@@ -25,7 +25,7 @@ function App() {
     return( 
     <div>
       <Login setToken={setToken} setLoggedUser={setLoggedUser}/>
-      {/* <Chat/> */}
+      <Chat/>
       </div>
     
     )
@@ -39,6 +39,7 @@ function App() {
 
         <Switch>
           <Route path="/" render={(props) => <User token={token} {...props} />}></Route>
+          
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
