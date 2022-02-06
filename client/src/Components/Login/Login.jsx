@@ -16,7 +16,7 @@ export default function Login({ setToken, setLoggedUser }) {
     try {
       const res = await API.post("/users/login", { email, password });
      
-      setUser(res.data);
+      // setUser(res.data.user);
       setToken(res.data.token);
       setLoggedUser(res.data);
     } catch (err) {
