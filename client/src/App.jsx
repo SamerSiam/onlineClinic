@@ -5,6 +5,8 @@ import User from "./Components/User/User";
 import NotFound from "./Components/NotFound/NotFound";
 import Login from "./Components/Login/Login";
 import Chat from "./Components/Chat/Chat";
+import Homepage from "./Components/Homepage/Homepage";
+
 
 
 function App() {
@@ -32,13 +34,17 @@ function App() {
   }
 
   return (
+  
     
     <div className="App">
+      
       <BrowserRouter>
         <Route render={(props) => <Header token={token} {...props} />}></Route>
 
         <Switch>
-          <Route path="/" render={(props) => <User token={token} {...props} />}></Route>
+          <Route exact path="/" component={Homepage}/>
+          <Route exact path="/UserInfo" render={(props) => <User token={token} {...props} />}></Route>
+          <Route exact path="/Chat" component={Chat}/>
           
           <Route component={NotFound} />
         </Switch>

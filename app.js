@@ -30,9 +30,15 @@ app.use("/api", userRouter);
 const publicPath = path.join(__dirname, "client/build");
 
 app.use(express.static(publicPath));
-
-io.on("connection", () => {
+let count = 0;
+io.on("connection", (socket) => {
   console.log("New WebSocket connection");
+  socket.emit("countUpdated", count);
+  socket.on("increment", () => {
+    count++;
+    //socket.emit("countUpdated", count);
+    io.emit("countUpdated", count);
+  });
 });
 app.get("/*", (req, res) => {
   res.sendFile(path.resolve(publicPath, "index.html"));

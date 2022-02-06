@@ -19,15 +19,16 @@ const Header = ({ token }) => {
   return (
     <div className="ui secondary pointing menu">
       <div>
-       
+      <Link to="/">
         <img className="logo" src={logo} alt="logo" />
+        </Link>
       </div>
       <h2> My Online Doctor</h2>
-      <Link to="/users" className="right item">
+      <Link to="/UserInfo" className="right item">
        
-        Send a Health Issue
+        My Medical File
       </Link>
-      <Link to="/Account" className="right item">
+      <Link to="/Chat" className="right item">
        
         Live Chat with your Doctor
       </Link>

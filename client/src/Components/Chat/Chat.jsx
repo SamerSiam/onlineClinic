@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from "react";
+import ChatUrl from '../../api/Chat'
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://127.0.0.1:5000";
+const socket = socketIOClient.connect(ENDPOINT);
+
 
 const Chat = ({token}) => {
     const [response, setResponse] = useState("");
+    const [count, setCount]=useState(0)
+
+    
+    const handleClick = (event) => {
+      console.log("click button")
+     socket.emit('increment')
+    };
+
 
     useEffect(() => {
-        const socket = socketIOClient.connect(ENDPOINT);
-        socket.on("FromAPI", data => {
-          setResponse(data);
+        
+        socket.on("countUpdated", (data) => {
+          console.log('the count been updated',data)
+          setCount(data);
         });
+        // return () => socket.disconnect();
       }, []);
     
       return (
         <p>
-         hi from the socket
+         Counter coming from the server <br/>{count}<br/> 
+         <button id="inc" onClick= {(e)=>handleClick()} > +1</button>
         </p>
       );
 }
