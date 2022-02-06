@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ChatUrl from '../../api/Chat'
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://127.0.0.1:5000";
+let ENDPOINT = "http://127.0.0.1:5000";
+if (process.env.NODE_ENV === "production") {
+  ENDPOINT = "https://samer-online-clinic.herokuapp.com/";
+}
 const socket = socketIOClient.connect(ENDPOINT);
 
 
