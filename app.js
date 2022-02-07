@@ -43,20 +43,13 @@ io.on("connection", (socket) => {
     if (filter.isProfane(message)) {
       return callback("Profanity is not allowed!");
     }
-    socket.emit("message", message);
+    io.emit("message", generateMessage(message));
     callback("Delivered");
   });
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
 });
-
-/********************/
-// const getApiAndEmit = (socket) => {
-//   const response = new Date();
-//   // Emitting a new message. Will be consumed by the client
-//   socket.emit("FromAPI", response);
-// };
 
 /**************Starting up the server */
 chatServer.listen(port, () => {

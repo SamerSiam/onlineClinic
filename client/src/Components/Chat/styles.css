@@ -91,10 +91,15 @@ button:disabled {
 
 .chat__sidebar {
   height: 85vh;
+  background-image: url("./sidemargin.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
-  background: #2c2f3a;
+  /* background: #2c2f3a; */
   width: 225px;
   overflow-y: scroll;
+  margin-right: 20px;
 }
 
 /* Chat styles */

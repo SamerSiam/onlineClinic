@@ -7,8 +7,6 @@ import Login from "./Components/Login/Login";
 import Chat from "./Components/Chat/Chat";
 import Homepage from "./Components/Homepage/Homepage";
 
-
-
 function App() {
   // console.log(process.env.NODE_ENV);
   const [token, setToken] = useState(null);
@@ -24,32 +22,33 @@ function App() {
   }, [token]);
 
   if (!token) {
-    return( 
-    <div>
-      <Login setToken={setToken} setLoggedUser={setLoggedUser}/>
-      <Chat/>
+    return (
+      <div>
+        <Login setToken={setToken} setLoggedUser={setLoggedUser} />
       </div>
-    
-    )
+    );
   }
 
   return (
-  
-    
     <div className="App">
-      
       <BrowserRouter>
         <Route render={(props) => <Header token={token} {...props} />}></Route>
 
         <Switch>
-          <Route exact path="/" component={Homepage}/>
-          <Route exact path="/UserInfo" render={(props) => <User token={token} {...props} />}></Route>
-          <Route exact path="/Chat" component={Chat}/>
-          
+          <Route exact path="/" component={Homepage} />
+          <Route
+            exact
+            path="/UserInfo"
+            render={(props) => <User token={token} {...props} />}
+          ></Route>
+          <Route
+            exact
+            path="/Chat"
+            render={(props) => <Chat user={loggedUser} {...props} />}
+          ></Route>
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
-     
     </div>
   );
 }
