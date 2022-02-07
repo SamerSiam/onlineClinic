@@ -1,7 +1,8 @@
 require("./db/mongoose");
 const http = require("http");
 const express = require("express");
-const socketio = require("socket.io");
+const Filter = require("bad-words");
+const { generateMessage } = require("./utils/messages");
 
 const User = require("./models/user");
 const userRouter = require("./routers/userRoutes");
@@ -12,9 +13,18 @@ const path = require("path");
 //
 
 const app = express();
-const chatServer = http.createServer(app);
-// const io = socketio(chatServer);
+const publicPath = path.join(__dirname, "client/build");
+app.use(express.static(publicPath));
 
+app.use(cors());
+app.use(express.json());
+app.use("/api", userRouter);
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(publicPath, "index.html"));
+});
+
+// chat server
+const chatServer = http.createServer(app);
 const io = require("socket.io")(chatServer, {
   cors: {
     origin: "http://localhost:3000",
@@ -22,27 +32,33 @@ const io = require("socket.io")(chatServer, {
     allowHeaders: "*",
   },
 });
-
-app.use(cors());
-app.use(express.json());
-app.use("/api", userRouter);
-//
-const publicPath = path.join(__dirname, "client/build");
-
-app.use(express.static(publicPath));
-let count = 0;
+let interval;
 io.on("connection", (socket) => {
-  console.log("New WebSocket connection");
-  socket.emit("countUpdated", count);
-  socket.on("increment", () => {
-    count++;
-    //socket.emit("countUpdated", count);
-    io.emit("countUpdated", count);
+  console.log("New client connected");
+  socket.emit("message", generateMessage("Welcome!"));
+  socket.broadcast.emit("message", "A new user has joined");
+
+  socket.on("sendMessage", (message, callback) => {
+    const filter = new Filter();
+    if (filter.isProfane(message)) {
+      return callback("Profanity is not allowed!");
+    }
+    socket.emit("message", message);
+    callback("Delivered");
+  });
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
   });
 });
-app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(publicPath, "index.html"));
-});
+
+/********************/
+// const getApiAndEmit = (socket) => {
+//   const response = new Date();
+//   // Emitting a new message. Will be consumed by the client
+//   socket.emit("FromAPI", response);
+// };
+
+/**************Starting up the server */
 chatServer.listen(port, () => {
-  console.log("listening on port " + port);
+  console.log("Listening on port " + port);
 });
