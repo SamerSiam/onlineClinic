@@ -36,7 +36,7 @@ const io = require("socket.io")(chatServer, {
 // client connects, greeting message
 io.on("connection", (socket) => {
   console.log("New client connected");
-  socket.emit("message", generateMessage("Welcome!"));
+  socket.emit("message", "Welcome to My Online Doctor!");
 
   // client sends message, server listens
   socket.on("sendMessage", (message, callback) => {

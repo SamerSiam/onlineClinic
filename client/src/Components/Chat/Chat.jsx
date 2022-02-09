@@ -5,6 +5,7 @@ import Message from "../MessageInput/Message";
 // import "./styles.min.css";
 import "./styles.css";
 
+// setup connection for both dev and production
 let ENDPOINT = "http://127.0.0.1:5000";
 if (process.env.NODE_ENV === "production") {
   ENDPOINT = "https://samer-online-clinic.herokuapp.com/";
@@ -60,7 +61,6 @@ const Chat = ({ user }) => {
   return (
     <div className="chat">
       <div className="chat__sidebar"></div>
-
       <div className="chat__main">
         <div className="chat__messages"> </div>
         {renderMessages()}
