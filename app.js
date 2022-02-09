@@ -32,18 +32,20 @@ const io = require("socket.io")(chatServer, {
     allowHeaders: "*",
   },
 });
-let interval;
+
+// client connects, greeting message
 io.on("connection", (socket) => {
   console.log("New client connected");
   socket.emit("message", generateMessage("Welcome!"));
-  socket.broadcast.emit("message", "A new user has joined");
 
+  // client sends message, server listens
   socket.on("sendMessage", (message, callback) => {
+    console.log("inside server", message);
     const filter = new Filter();
-    if (filter.isProfane(message)) {
+    if (filter.isProfane(message.text)) {
       return callback("Profanity is not allowed!");
     }
-    io.emit("message", generateMessage(message));
+    io.emit("message", message);
     callback("Delivered");
   });
   socket.on("disconnect", () => {
