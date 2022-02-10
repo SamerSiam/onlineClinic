@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "./onlinedoctor.jpg";
+import logo from "./logo2.svg";
 import "./Header.css";
 import API from "../../api/Api";
 
@@ -23,7 +23,10 @@ const Header = ({ token }) => {
           <img className="logo" src={logo} alt="logo" />
         </Link>
       </div>
-      <h2> My Online Doctor</h2>
+      <div className="title">
+        <h3> My Online Doctor</h3>
+      </div>
+
       <Link to="/UserInfo" className="right item">
         My Medical File
       </Link>

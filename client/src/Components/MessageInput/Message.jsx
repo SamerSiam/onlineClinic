@@ -1,10 +1,8 @@
 import React, { useState, useRef } from "react";
 import dateFormat from "dateformat";
-// import './MessageInput.css';
 
 const NewMessage = ({ socket, user }) => {
   const textInput = useRef();
-  console.log("inside messages:", user);
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
 
@@ -27,7 +25,7 @@ const NewMessage = ({ socket, user }) => {
     return {
       text,
       createdAt: dateFormat(new Date().getTime(), "shortTime"),
-      username: user.user.fname,
+      username: user.fname,
     };
   };
   return (

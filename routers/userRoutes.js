@@ -10,6 +10,7 @@ const {
   getMyUser,
   userLogout,
   logOutAll,
+  updateMyUser,
 } = require("../controllers/apiControllers");
 
 const router = new express.Router();
@@ -27,7 +28,9 @@ router.post("/users", addNewUser);
 router.delete("/users", auth, deleteUser);
 
 /**********************update user by id************************ */
-router.patch("/users/:id", updateUser);
+// router.patch("/users/:id", updateUser);
+//update my user
+router.patch("/users/me", auth, updateMyUser);
 
 /**********************user login/logout************************ */
 router.post("/users/login", userLogin);

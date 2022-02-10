@@ -3,7 +3,8 @@ const patients = require("../models/patient");
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, "thisismycourse");
+    const decoded = jwt.verify(token, process.env.SECRET);
+
     const user = await patients.findOne({ _id: decoded._id, "tokens.token": token });
 
     if (!user) {

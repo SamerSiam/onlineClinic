@@ -12,14 +12,19 @@ import userIcon from "./user.png";
 //   maximumFractionDigits: 2,
 // });
 const User = ({ token }) => {
+  const tokenString = localStorage.getItem("token");
+  const userToken = JSON.parse(tokenString);
+
   const [user, setUser] = useState();
   const [update, setUpdate] = useState(false);
+  // const [token, setToken] = useState("");
 
+  // setToken(userToken);
   //get the logged in patient info
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const auth = `Bearer ${token}`;
+        const auth = `Bearer ${token || userToken}`;
         const data = await API.get("/users/me", { headers: { Authorization: auth } });
         console.log(data.data);
         setUser(data);
@@ -28,15 +33,9 @@ const User = ({ token }) => {
       }
     };
     getUserInfo();
-  }, [token]);
+  }, [token, update, userToken]);
 
-  // update patient info
-  const updateUser = async (user) => {
-    // const id = item._id;
-    // await API.delete(`/users/${id}`);
-    // window.location.reload();
-    setUpdate(true);
-  };
+  // render patient info
 
   if (!user) {
     return <Spinner />;
@@ -68,7 +67,7 @@ const User = ({ token }) => {
                     <a href={"mailto:" + user.data.email}>{user.data.email}</a>
                   </td>
                   <td>
-                    <i onClick={() => updateUser(user)} className="edit outline icon"></i>
+                    <i onClick={() => setUpdate(true)} className="edit outline icon"></i>
                   </td>
                 </tr>
               </tbody>

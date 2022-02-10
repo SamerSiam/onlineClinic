@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import "./Login.css";
 import API from "../../api/Api";
 
 /****************************************************** */
 export default function Login({ setToken, setLoggedUser }) {
-  const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -18,14 +16,26 @@ export default function Login({ setToken, setLoggedUser }) {
       setToken(res.data.token);
       setLoggedUser(res.data);
     } catch (err) {
-      setError(err);
-      console.log(error);
+      setError(true);
     }
   };
-
+  if (error) {
+    return (
+      <div>
+        <p>Sorry, Sign in failed!</p>
+        <button
+          className="ui blue submit button"
+          type="submit"
+          onClick={() => window.location.reload()}
+        >
+          Back to Login
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="login-wrapper">
-      <h1>Sign in to My Online Doctor</h1>
+      <div className="login-title">Sign in to My Online Doctor</div>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Username</p>
@@ -52,7 +62,3 @@ export default function Login({ setToken, setLoggedUser }) {
     </div>
   );
 }
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-};

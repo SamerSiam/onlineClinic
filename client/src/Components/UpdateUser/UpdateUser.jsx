@@ -1,91 +1,41 @@
 import React, { useState } from "react";
-// import API from "../../api/Api";
+import API from "../../api/Api";
 
 import "./Update.css";
 
 function UpdateUser({ user, setUpdate }) {
+  const tokenString = localStorage.getItem("token");
+  const userToken = JSON.parse(tokenString);
+
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
-  console.log("inside update user", user);
-
-  /** Loading current customer account from API *****/
-  //   useEffect(() => {
-  //     const fetch = async () => {
-  //         try {
-  //             const auth = `Bearer ${token}`;
-  //             const data=await API.get("/users/me", { headers: { Authorization: auth } });
-  //             console.log(data.data)
-  //             setUser(data);
-  //           } catch (err) {
-  //             console.log(err);
-  //           }
-  //     };
-  //     fetch();
-  //   }, [currentCustomer.id]);
-  /***************************************************************** */
-
   /****************************************************** */
   const handleSubmit = (event) => {
     event.preventDefault();
+    const updateObject = {
+      fname,
+      lname,
+      email,
+      phone,
+    };
+    const update = async () => {
+      try {
+        const auth = `Bearer ${userToken}`;
+        await API.patch("/users/me", updateObject, {
+          headers: { Authorization: auth },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    update();
+    setUpdate(false);
+    window.location.reload();
   };
 
-  /****************************************************** */
-
-  // // check if user has enough money to buy
-  // if (account.balance >= totalPrice) {
-  //   setFunds(true);
-
-  //   //if user has the coin in their account, need to update the amount
-  //   if (coinExists) {
-  //     coinExists.amount = parseFloat(coinExists.amount) + parseFloat(amount);
-  //   }
-  //   //add the coin object to the account
-  //   else {
-  //     let newCoin = {
-  //       coin: currentCoin.symbol,
-  //       amount: parseFloat(amount),
-  //       image: currentCoin.image,
-  //       price: currentCoin.current_price,
-  //       name: currentCoin.name,
-  //     };
-  //     tempCoins.push(newCoin);
-  //   }
-
-  //   /**  update account object */
-  //   setAccount((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       balance: prevState.balance - totalPrice,
-  //       cryptoCoins: [...tempCoins],
-  //     };
-  //   });
-
-  //       // need to update coin array
-  //     } else {
-  //       setFunds(false);
-  //       setMessage("You do not Have Enough Funds in Your Account");
-  //     }
-  //   };
-
-  /**********************************************************************************
-   * Update API
-   */
-  // useEffect(() => {
-  //   const update = async () => {
-
-  //       try {
-  //         const updatedUser = await API.post();
-
-  //       } catch (err) {
-  //         console.log(err.message);
-  //       }
-
-  //   };
-  //   update();
-  // }, []);
   /********************************************************** */
   return (
     <div className="form-container">
@@ -97,7 +47,7 @@ function UpdateUser({ user, setUpdate }) {
           <input
             className="input-field"
             type="text"
-            placeholder={user.data.fname}
+            defaultValue={user.data.fname}
             onChange={(e) => setFname(e.target.value)}
           />
         </div>{" "}
@@ -105,7 +55,7 @@ function UpdateUser({ user, setUpdate }) {
         <input
           className="input-field"
           type="text"
-          placeholder={user.data.lname}
+          defaultValue={user.data.lname}
           onChange={(e) => setLname(e.target.value)}
         />
         <div>
@@ -114,7 +64,7 @@ function UpdateUser({ user, setUpdate }) {
           <input
             className="input-field"
             type="text"
-            placeholder={user.data.email}
+            defaultValue={user.data.email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>

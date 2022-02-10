@@ -42,7 +42,7 @@ const patientSchema = new mongoose.Schema({
 
 patientSchema.methods.generateAuthToken = async function () {
   const patient = this;
-  const token = jwt.sign({ _id: patient._id.toString() }, "thisismycourse");
+  const token = jwt.sign({ _id: patient._id.toString() }, process.env.SECRET);
   patient.tokens = patient.tokens.concat({ token });
   await patient.save();
   return token;

@@ -16,3 +16,27 @@ body {
   background-position: center;
   opacity: 0.8;
 }
+
+.login-title {
+  margin-top: 2vh;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(65, 13, 207);
+  padding: 5px;
+}
+
+form {
+  margin-top: 7vh;
+}
+
+/* .login-left {
+  height: 85vh;
+  background-image: url("./doctor-patient.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  width: 225px;
+  overflow-y: scroll;
+  margin-right: 20px;
+} */

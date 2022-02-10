@@ -68,7 +68,28 @@ const updateUser = async (req, res) => {
     await user.save();
 
     if (!user) {
-      return res.status(404).send("User not found, unable to upadte user");
+      return res.status(404).send("User not found, unable to update user");
+    }
+    res.send(user);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
+/***********update my user **************************/
+const updateMyUser = async (req, res) => {
+  const id = req.user.id;
+  const updates = Object.keys(req.body);
+
+  try {
+    const user = await Patient.findById(id);
+
+    updates.forEach((update) => (user[update] = req.body[update]));
+
+    await user.save();
+
+    if (!user) {
+      return res.status(404).send("User not found, unable to update user");
     }
     res.send(user);
   } catch (err) {
@@ -86,7 +107,7 @@ const userLogin = async (req, res) => {
     }
     res.send({ user: user, token }); // removes sensitive info
   } catch (err) {
-    res.status(400).send();
+    res.status(400).send("Failed to authenticate user");
   }
 };
 
@@ -125,4 +146,5 @@ module.exports = {
   getMyUser,
   userLogout,
   logOutAll,
+  updateMyUser,
 };

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import Message from "../MessageInput/Message";
-
-// import "./styles.min.css";
+import API from "../../api/Api";
 import "./styles.css";
 
 // setup connection for both dev and production
@@ -11,16 +10,29 @@ if (process.env.NODE_ENV === "production") {
   ENDPOINT = "https://samer-online-clinic.herokuapp.com/";
 }
 
-const Chat = ({ user }) => {
+const Chat = () => {
+  const tokenString = localStorage.getItem("token");
+  const userToken = JSON.parse(tokenString);
   const [currentUser, setCurrentUser] = useState("");
   const [socket, setSocket] = useState(null);
   const [messageArr, setMessageArr] = useState([]);
 
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const auth = `Bearer ${userToken}`;
+        const data = await API.get("/users/me", { headers: { Authorization: auth } });
+        setCurrentUser(data.data);
+      } catch (err) {
+        setError(err);
+        console.log(err);
+      }
+    };
+    getUserInfo();
+  }, [userToken]);
 
   useEffect(() => {
-    setCurrentUser(user);
-
     // establish socket connection to the server
     const newSocket = socketIOClient.connect(ENDPOINT);
     setSocket(newSocket);
@@ -39,7 +51,7 @@ const Chat = ({ user }) => {
 
     // disconnect socket once component unmountes
     return () => newSocket.disconnect();
-  }, [setSocket, user]);
+  }, [setSocket]);
 
   /********************Render Messages Array************************* */
   const renderMessages = () => {
@@ -51,6 +63,7 @@ const Chat = ({ user }) => {
             <span className="message__meta"> {msg.createdAt}</span>
           </p>
           <p>{msg.text} </p>
+          {error}
         </div>
       );
     });

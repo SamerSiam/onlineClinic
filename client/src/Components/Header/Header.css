@@ -8,11 +8,14 @@
   line-height: 1.15;
 }
 
+.title {
+  margin-top: 25px;
+  color: #333;
+}
 .logo {
   padding-left: 10px;
-  padding-right: 5px;
   padding-top: 10px;
-  margin-left: 5px;
+  margin-left: 1px;
   width: 120px;
   height: 100px;
 }
