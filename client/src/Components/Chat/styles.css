@@ -86,6 +86,7 @@ button:disabled {
 
 .chat {
   display: flex;
+  width: 80%;
   background-color: #fff;
 }
 
@@ -96,7 +97,6 @@ button:disabled {
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
-  /* background: #2c2f3a; */
   width: 225px;
   overflow-y: scroll;
   margin-right: 20px;
@@ -107,7 +107,7 @@ button:disabled {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
+  max-height: 90vh;
 }
 
 .chat__messages {
@@ -133,16 +133,12 @@ button:disabled {
   font-size: 14px;
 }
 
-.message a {
-  color: #0070cc;
-}
-
 /* Message Composition Styles */
 
 .compose {
   display: flex;
   flex-shrink: 0;
-  margin-top: 16px;
+  margin-top: 10px;
   padding: 24px;
 }
 
@@ -162,26 +158,4 @@ button:disabled {
 
 .compose button {
   font-size: 14px;
-}
-
-/* Chat Sidebar Styles */
-
-.room-title {
-  font-weight: 400;
-  font-size: 22px;
-  background: #2c2f3a;
-  padding: 24px;
-}
-
-.list-title {
-  font-weight: 500;
-  font-size: 18px;
-  margin-bottom: 4px;
-  padding: 12px 24px 0 24px;
-}
-
-.users {
-  list-style-type: none;
-  font-weight: 300;
-  padding: 12px 24px 0 24px;
 }

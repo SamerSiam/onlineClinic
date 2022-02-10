@@ -5,12 +5,12 @@
 }
 .form-container {
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
-  padding: 10px 10px;
   width: 70vw;
   height: 50vh;
   text-align: center;
+  margin-top: 10vh;
 }
 
 .form-update {
@@ -26,25 +26,37 @@
 
 .form-row1 {
   display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  margin: 20px;
-  padding: 10px;
+  justify-content: center;
+  flex-direction: row;
+  margin: 2px;
 }
 
 .input-label {
   width: 100%;
   margin-left: 10px;
   text-align: center;
+  margin-top: 10px;
+  padding-top: 20px;
+  padding-right: 20px;
 }
 
 .input-field {
+  width: 10vw;
   margin-right: 10px;
+  margin: 5px;
+  padding: 10px;
+  align-items: flex-end;
 }
 .form-row2 {
   margin: 20px;
+  align-items: flex-end;
 }
 .form-row3 {
   margin: 20px;
   font-weight: 700;
+}
+.welcome {
+  font-size: 1.2vw;
+  color: rgb(67, 18, 114);
+  font-weight: bold;
 }

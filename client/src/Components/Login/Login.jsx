@@ -15,8 +15,6 @@ export default function Login({ setToken, setLoggedUser }) {
     e.preventDefault();
     try {
       const res = await API.post("/users/login", { email, password });
-     
-      // setUser(res.data.user);
       setToken(res.data.token);
       setLoggedUser(res.data);
     } catch (err) {
@@ -24,25 +22,10 @@ export default function Login({ setToken, setLoggedUser }) {
       console.log(error);
     }
   };
- 
-  /********************************************************** */
-  // const userLoginFunc = async (usr, pwd) => {
-  //   try {
-  //     const { data } = await Tokens.get(`/Tokens/${usr}`);
-  //     setToken(data.token);
-  //     setCust(data);
-  //     if (data) {
-  //       this.props.history.push("/Home");
-  //     }
-  //   } catch (e) {
-  //     console.log({ errorMsg: e.message });
-  //   }
-  // };
-  /************************************************************* */
 
   return (
     <div className="login-wrapper">
-      <h1>Sign in to Online Clinic</h1>
+      <h1>Sign in to My Online Doctor</h1>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Username</p>
@@ -65,6 +48,7 @@ export default function Login({ setToken, setLoggedUser }) {
           </button>
         </div>
       </form>
+      {error}
     </div>
   );
 }

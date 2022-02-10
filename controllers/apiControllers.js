@@ -81,6 +81,9 @@ const userLogin = async (req, res) => {
   try {
     const user = await Patient.findByCredentials(req.body.email, req.body.password);
     const token = await user.generateAuthToken();
+    if (!user || !token) {
+      return res.status(404).send("Failed to authenticate user");
+    }
     res.send({ user: user, token }); // removes sensitive info
   } catch (err) {
     res.status(400).send();

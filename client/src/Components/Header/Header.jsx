@@ -31,7 +31,7 @@ const Header = ({ token }) => {
         Live Chat with your Doctor
       </Link>
 
-      <Link to="/login" className="right item">
+      <Link to="/" className="right item">
         <span onClick={userLogOut}>Log Out</span> <i className="user logout icon"></i>
       </Link>
     </div>
