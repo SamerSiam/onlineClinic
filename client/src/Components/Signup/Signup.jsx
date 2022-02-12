@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import API from "../../api/Api";
 import "./Signup.css";
 
-export default function Signup({ setNewUser, setToken }) {
+function Signup({ setNewUser, setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fname, setFname] = useState("");
@@ -68,3 +68,4 @@ export default function Signup({ setNewUser, setToken }) {
     </div>
   );
 }
+export default Signup;
