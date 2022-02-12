@@ -10,7 +10,6 @@ function UpdateUser({ user, setUpdate }) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
-  // const [phone, setPhone] = useState("");
 
   /****************************************************** */
   const handleSubmit = (event) => {
