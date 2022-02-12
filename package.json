@@ -41,7 +41,6 @@
     "query-string": "^7.1.1",
     "react-bootstrap": "^2.1.2",
     "react-slick": "^0.28.1",
-    "react-slideshow-image": "^3.7.0",
     "slick-carousel": "^1.8.1",
     "socket.io": "^4.4.1",
     "validator": "^13.7.0"
