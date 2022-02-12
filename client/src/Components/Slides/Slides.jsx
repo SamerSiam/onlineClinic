@@ -5,7 +5,7 @@ import image2 from "./image2.jpg";
 import image3 from "./image3.jpg";
 import "./styles.css";
 
-const Slides = () => {
+export default function Slides() {
   const fadeImages = [image1, image2, image3];
 
   let styles = {
@@ -38,6 +38,4 @@ const Slides = () => {
       </Fade>
     </div>
   );
-};
-
-export default Slides;
+}
