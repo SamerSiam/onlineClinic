@@ -1,0 +1,53 @@
+.create-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.15);
+  text-align: right;
+}
+.create-form button {
+  margin: 1rem 1rem 0.2rem 1rem;
+  width: 60%;
+}
+.create-form input {
+  padding: 0.15rem;
+  /* border-radius: 5px; */
+  text-align: right;
+}
+.create-form label {
+  font-weight: 600;
+  text-align: right;
+  color: cadetblue;
+}
+.create-btn {
+  color: floralwhite;
+  border-color: transparent;
+  padding: 10px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: rgb(27, 172, 123);
+  font-weight: 600;
+  width: 211px;
+}
+.create-btn:hover {
+  background-color: rgb(37, 194, 142);
+}
+.create-form-wrap {
+  margin-bottom: 10px;
+  width: 400px;
+}
+.create-form-wrap input {
+  margin-bottom: 10px;
+  width: 80%;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.create-form-wrap button {
+  padding: 0.5rem;
+  /* width: 80%; */
+}

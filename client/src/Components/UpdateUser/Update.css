@@ -3,14 +3,14 @@
   color: red;
   font-weight: bold;
 }
-.form-container {
+.form-cont {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70vw;
+  width: 1000px;
   height: 50vh;
   text-align: center;
-  margin-top: 10vh;
+  margin-top: 2vh;
 }
 
 .form-update {
@@ -19,7 +19,7 @@
   border-radius: 15px;
   background-color: #ffffff;
   height: 100%;
-  width: 40%;
+  width: 100%;
   padding-bottom: 20px;
   padding-top: 20px;
 }

@@ -1,22 +1,29 @@
 import React from "react";
-// import { Fade } from "react-slideshow-image";
-// import image1 from "./image1.png";
+import image1 from "./image1.png";
 // import image2 from "./image2.jpg";
 // import image3 from "./image3.jpg";
 import "./styles.css";
 
 export default function Slides() {
-  return <div></div>;
+  let styles = {
+    objectFit: "cover",
+    width: "80%",
+    height: "80%",
+    backgroundRepeat: "noRepeat",
+    backgroundSize: "cover",
+    overflow: "hidden",
+    backgroundPosition: " center center",
+    textAlign: "center",
+    paddingLeft: "200px",
+    paddingTop: "50px",
+  };
+  return (
+    <div>
+      <img src={image1} style={styles} alt="image1" />
+    </div>
+  );
   //   const fadeImages = [image1, image2, image3];
-  //   let styles = {
-  //     objectFit: "cover",
-  //     width: "70%",
-  //     height: "100%",
-  //     backgroundRepeat: "noRepeat",
-  //     backgroundSize: "cover",
-  //     overflow: "hidden",
-  //     backgroundPosition: " center center",
-  //   };
+
   //   return (
   //     <div className="slide-container">
   //       <Fade>

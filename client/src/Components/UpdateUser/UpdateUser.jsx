@@ -10,7 +10,7 @@ function UpdateUser({ user, setUpdate }) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  // const [phone, setPhone] = useState("");
 
   /****************************************************** */
   const handleSubmit = (event) => {
@@ -19,7 +19,6 @@ function UpdateUser({ user, setUpdate }) {
       fname,
       lname,
       email,
-      phone,
     };
     const update = async () => {
       try {
@@ -38,7 +37,7 @@ function UpdateUser({ user, setUpdate }) {
 
   /********************************************************** */
   return (
-    <div className="form-container">
+    <div className="form-cont">
       <form className="form-update" onSubmit={handleSubmit}>
         <div className="welcome">Update User Info</div>
         <div className="form-row1"></div>
@@ -58,7 +57,7 @@ function UpdateUser({ user, setUpdate }) {
           defaultValue={user.data.lname}
           onChange={(e) => setLname(e.target.value)}
         />
-        <div>
+        <div className="form-row2">
           <span className=".input-label">Email:</span>
 
           <input
@@ -68,14 +67,9 @@ function UpdateUser({ user, setUpdate }) {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div>
-          <span className=".input-label">Phone Number:</span>
-
-          <input className="input-field" type="text" onChange={(e) => setPhone(e.target.value)} />
-        </div>
         <div className="form-row3">
-          <button className="ui primary button">Update</button>
-          <button className="ui  button" onClick={(e) => setUpdate(false)}>
+          <button className="ui mini button">Update</button>
+          <button className="ui  mini button" onClick={(e) => setUpdate(false)}>
             Cancel
           </button>
         </div>
