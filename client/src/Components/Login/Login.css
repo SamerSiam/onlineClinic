@@ -1,5 +1,5 @@
 body {
-  background-color: #c1c1c1;
+  /* background-color: #c1c1c1; */
   box-sizing: border-box;
 }
 
@@ -27,16 +27,12 @@ body {
 
 form {
   margin-top: 7vh;
+  margin-bottom: 3vh;
 }
 
-/* .login-left {
-  height: 85vh;
-  background-image: url("./doctor-patient.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: white;
-  width: 225px;
-  overflow-y: scroll;
-  margin-right: 20px;
-} */
+.singup-msg {
+  font-size: 15px;
+  text-decoration: underline;
+  color: rgb(231, 15, 15);
+  z-index: 1;
+}

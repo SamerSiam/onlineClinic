@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Signup from "../Signup/Signup";
 import "./Login.css";
 import API from "../../api/Api";
 
@@ -7,7 +8,16 @@ export default function Login({ setToken, setLoggedUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-
+  const [newUser, setNewUser] = useState(false);
+  if (newUser === true) {
+    console.log("true");
+    return (
+      <div>
+        {" "}
+        <Signup setToken={setToken} setNewUser={setNewUser} />
+      </div>
+    );
+  }
   /****************************************************** */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +45,12 @@ export default function Login({ setToken, setLoggedUser }) {
   }
   return (
     <div className="login-wrapper">
-      <div className="login-title">Sign in to My Online Doctor</div>
+      <div className="login-title">
+        Sign in to My Online Doctor OR
+        <p className="singup-msg" onClick={(e) => setNewUser(true)}>
+          Setup a New Acount
+        </p>
+      </div>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Username</p>
@@ -58,6 +73,7 @@ export default function Login({ setToken, setLoggedUser }) {
           </button>
         </div>
       </form>
+
       {error}
     </div>
   );
